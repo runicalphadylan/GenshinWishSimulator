@@ -51,34 +51,19 @@ namespace GenshinWishSimulator
             for (int i = wishcount; i > 0; i--)
             {
                 int rng = rnd.Next(1000);
-                if (pc5 == 89)
+                if (pc5 == 89 || rng <= pity)
                 {
-                    Console.WriteLine("*****");
+                    int rng5star = rnd.Next(16);
+                    Reward5star(rng5star);
                     pc5 = 0;
                     pt5++;
                     twishcount++;
                     pity = 6;
                 }
-                else if (rng <= pity)
+                else if (pc4 == 9 || rng <= 57)
                 {
-                    Console.WriteLine("*****");
-                    pc5 = 0;
-                    pt5++;
-                    twishcount++;
-                    pity = 6;
-                }
-                else if (pc4 == 9)
-                {
-                    Console.WriteLine("****");
-                    pc4 = 0;
-                    pc5++;
-                    pt4++;
-                    twishcount++;
-                    if (pc5 >= 74) { pity += 60; } else continue;
-                }
-                else if (rng <= 57)
-                {
-                    Console.WriteLine("****");
+                    int rng4star = rnd.Next(40);
+                    Reward4star(rng4star);
                     pc4 = 0;
                     pc5++;
                     pt4++;
@@ -87,7 +72,8 @@ namespace GenshinWishSimulator
                 }
                 else
                 {
-                    Console.WriteLine("***");
+                    int rng3star = rnd.Next(22);
+                    Reward3star(rng3star);
                     pc4++;
                     pc5++;
                     pt3++;
@@ -108,5 +94,42 @@ namespace GenshinWishSimulator
             Console.WriteLine("4star pity = " + pc4);
         }
 
+        static void Reward3star(int rnd3star)
+        {
+            Random rnd = new Random();
+            string[] reward3star = { "Black Tassel", "Bloodstained Greatsword",
+                    "Cool Steel", "Debate Club", "Emerald Orb", "Ferrous Shadow",
+                    "Fillet Blade", "Halberd", "Harbinger of Dawn", "Magic Guide",
+                    "Messenger", "Otherworldly Story", "Raven Bow", "Recurve Bow",
+                    "Sharpshooter's Oath", "Skyrider Greatsword", "Skyrider Sword",
+                    "Slingshot", "Thrilling Tales of Dragonslayers", "Traveler's Handy Sword",
+                    "Twin Nephrite", "White Iron Greatsword", "White Taseel"};
+            Console.WriteLine("***\t\t" + reward3star[rnd3star]);
+        }
+
+        static void Reward4star(int rnd4star)
+        {
+            Random rnd = new Random();
+            string[] reward4star = { "Amber", "Barbara", "Beidou", "Bennett",
+                    "Candace", "Charlotte", "Chevreuse", "Chongyun", "Collei", 
+                    "Diona", "Dori", "Faruzan", "Fischl", "Freminet", "Gaming",
+                    "Gorou", "Kachina", "Kaeya", "Kaveh", "Kirara", "Kujou Sara",
+                    "Kuki Shinobu", "Layla", "Lisa", "Lynette", "Mika", "Ningguang",
+                    "Noelle", "Razor", "Rosaria", "Sayu", "Sethos", "Shikanoin Heizou",
+                    "Sucrose", "Thoma", "Xiangling", "Xingqiu", "Xinyan", "Yanfei",
+                    "Yaoyao", "Yunjin"};
+            Console.WriteLine("****\t\t" + reward4star[rnd4star]);
+        }
+
+        static void Reward5star(int rnd5star)
+        {
+            Random rnd = new Random();
+            string[] reward5star = { "Jean", "Diluc",
+                    "Mona", "Qiqi", "Keqing", "Tignari",
+                    "Dehya", "Skyward Blade", "Skyward Atlas", "Skyward Pride",
+                    "Skyward Harp", "Skyward Spine", "Wolf's Gravestone", "Aquilla Favonia",
+                    "Primodial Jade-Winged Spear", "Lost Prayers to Sacred Winds", "Amos Bow"};
+            Console.WriteLine("*****\t\t" + reward5star[rnd5star]);
+        }
     }
 }
